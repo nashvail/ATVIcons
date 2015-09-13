@@ -4,13 +4,13 @@
 		<style>
 			body { 
 				margin: 0; 
-				background-color : #E8EEED;
+				background-color : #779BF9;
 			}
 
 			.icon {
 				position : relative;
-				width : 300px;
-				height: 170px;
+				width : 280px;
+				height: 150px;
 				margin: 100 auto;
 			}
 
@@ -19,8 +19,8 @@
 				width : 100%;
 				height: 100%;
 				border-radius : 8px;
-				background: #C34DBF;
-				border : 1px solid #B566BF;
+				background-image: linear-gradient(-180deg, #DDDEDE 0%, #8C8E93 100%);
+				border: 1px solid #979797;;
 				cursor : pointer;
 				color : #ECB9F8;
 				z-index : 1;
@@ -32,13 +32,13 @@
 
 			 .shadow {
 			 	position : absolute;
-			 	top : 30px;
+			 	top : 15px;
 			 	left : 0px;
 			 	width : 100%;
 			 	height : 100%;
 			 	border-radius : 10%;
-			 	background-color : rgba(0, 0, 0, 0.35);
-			 	-webkit-filter: blur(20px);
+			 	background-color : rgba(0, 0, 0, 0.3);
+			 	-webkit-filter: blur(15px);
 			 	z-index : -1;
 			 }
 
@@ -69,14 +69,49 @@
 			 }
 
 
+			 .cog1 {
+			 	position : absolute;
+				height : 120px;
+				width : 120px;
+				top : 15px;
+				left : 80px;
+				border-radius : 100%;
+				background-color :#5F5D60;
+				z-index : 2;
+			 }
+
+			 .cog2 {
+			 	position : absolute;
+				top : 27px;
+				left : 92px;
+				height : 100px;
+				width : 100px;
+				border-radius : 100%;
+				background-image: url('./Big Geared Wheel.png');
+				z-index : 3;
+			 }
+
+			 .cog3{
+			 	position : absolute;
+				top : 45px;
+				left : 110px;
+				height : 63px;
+				width : 63px;
+				border-radius : 100%;
+				background-image: url('Smaller Geared Wheel.png');
+				z-index : 4;
+			 }
+
+
 		</style>
 	</head>
 	<body>
 		<div class="icon">
-			<div class="title">tv shows</div>
-			<div class="subtitle">iTunes</div>
-			<div class="box"></div>
-			<div class="shadow"></div>
+			<div data-stacking-index = "1.8" class="cog3"></div>
+			<div data-stacking-index = "1.4" class="cog2"></div>
+			<div data-stacking-index = "1" class="cog1"></div>
+			<div data-stacking-index = "1" class="box"></div>
+			<div data-stacking-index = "2" class="shadow"></div>
 		</div>
 		<script src="jquery-1.11.2.min.js"></script>
 		<script src = "main.js"></script>

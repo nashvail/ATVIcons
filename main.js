@@ -8,7 +8,7 @@
 			mouseOffsetInside = {},
 			perspectiveAmount = 800;
 
-	var maxRotation = 4;
+	var maxRotation = 8;
 	var maxTranslation = 4;
 
 
@@ -46,9 +46,9 @@
 			yTranslationPercentage : yTranslationPercentage
 		});
 
-		appleTvAnimate($(this).children('.title'), 600, {
-			maxTranslationX : maxTranslation * 0.65,
-			maxTranslationY : maxTranslation * 0.65,
+		appleTvAnimate($(this).children('.cog1'), 600, {
+			maxTranslationX : maxTranslation * 1,
+			maxTranslationY : maxTranslation * 1,
 			maxRotationX : maxRotation,
 			maxRotationY : maxRotation,
 			xRotationPercentage : xRotationPercentage,
@@ -57,9 +57,9 @@
 			yTranslationPercentage : yTranslationPercentage 
 		});
 
-		appleTvAnimate($(this).children('.subtitle'), 600, {
-			maxTranslationX : maxTranslation * 0.8,
-			maxTranslationY : maxTranslation * 0.8 ,
+		appleTvAnimate($(this).children('.cog2'), 600, {
+			maxTranslationX : maxTranslation * 1.4,
+			maxTranslationY : maxTranslation * 1.4,
 			maxRotationX : maxRotation,
 			maxRotationY : maxRotation,
 			xRotationPercentage : xRotationPercentage,
@@ -68,7 +68,16 @@
 			yTranslationPercentage : yTranslationPercentage 
 		});
 
-
+		appleTvAnimate($(this).children('.cog3'), 600, {
+			maxTranslationX : maxTranslation * 1.8,
+			maxTranslationY : maxTranslation * 1.8,
+			maxRotationX : maxRotation,
+			maxRotationY : maxRotation,
+			xRotationPercentage : xRotationPercentage,
+			yRotationPercentage : yRotationPercentage,
+			xTranslationPercentage : xTranslationPercentage,
+			yTranslationPercentage : yTranslationPercentage 
+		});
 
 	});
 
