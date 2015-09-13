@@ -88,6 +88,21 @@
 					yTranslationPercentage : yTranslationPercentage
 				});				
 			});
+
+
+			// For animating the glow
+			that.appleTvAnimate($('.glow'), {
+				maxTranslationX : that.maxTranslation * 5,
+				maxTranslationY : that.maxTranslation * 5,
+				maxRotationX : that.maxRotation,
+				maxRotationY : that.maxRotation,
+				xRotationPercentage : xRotationPercentage,
+				yRotationPercentage : yRotationPercentage,
+				xTranslationPercentage : xTranslationPercentage,
+				yTranslationPercentage : yTranslationPercentage
+			});				
+
+
 		}
 	};
 
