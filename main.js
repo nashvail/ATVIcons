@@ -1,10 +1,10 @@
 (function() {
 	'use strict';
 
-	var $box = $('.icon'),
-			offset = $box.offset(),
-			width = $box.width(),
-			height = $box.height(),
+	var $icon = $('.icon'),
+			offset = $icon.offset(),
+			width = $icon.width(),
+			height = $icon.height(),
 			mouseOffsetInside = {},
 			perspectiveAmount = 800;
 
@@ -12,7 +12,7 @@
 	var maxTranslation = 4;
 
 
-	$box.on('mousemove', function(e) {
+	$icon.on('mousemove', function(e) {
 		mouseOffsetInside = {
 			x : e.pageX - offset.left,
 			y : e.pageY - offset.top
@@ -24,61 +24,20 @@
 		var xTranslationPercentage = calculateTranslationPercentage(mouseOffsetInside.x, width);
 		var yTranslationPercentage = calculateTranslationPercentage(mouseOffsetInside.y, height);
 
-		appleTvAnimate($(this).children('.box'), perspectiveAmount, {
-			maxTranslationX : maxTranslation,
-			maxTranslationY : maxTranslation,
-			maxRotationX : maxRotation,
-			maxRotationY : maxRotation,
-			xRotationPercentage : xRotationPercentage,
-			yRotationPercentage : yRotationPercentage,
-			xTranslationPercentage : xTranslationPercentage,
-			yTranslationPercentage : yTranslationPercentage
+		$(this).children().each(function(index, element) {
+			var stackingFactor = $(element).attr('data-stacking-factor');
+			appleTvAnimate($(element), perspectiveAmount, {
+				maxTranslationX : maxTranslation * stackingFactor,
+				maxTranslationY : maxTranslation * stackingFactor,
+				maxRotationX : maxRotation,
+				maxRotationY : maxRotation,
+				xRotationPercentage : xRotationPercentage,
+				yRotationPercentage : yRotationPercentage,
+				xTranslationPercentage : xTranslationPercentage,
+				yTranslationPercentage : yTranslationPercentage
+			});
 		});
-
-		appleTvAnimate($(this).children('.shadow'), 0, {
-			maxTranslationX : maxTranslation * 2,
-			maxTranslationY : maxTranslation * 2,
-			maxRotationX : maxRotation,
-			maxRotationY : maxRotation,
-			xRotationPercentage : xRotationPercentage,
-			yRotationPercentage : yRotationPercentage,
-			xTranslationPercentage : xTranslationPercentage,
-			yTranslationPercentage : yTranslationPercentage
-		});
-
-		appleTvAnimate($(this).children('.cog1'), 600, {
-			maxTranslationX : maxTranslation * 1,
-			maxTranslationY : maxTranslation * 1,
-			maxRotationX : maxRotation,
-			maxRotationY : maxRotation,
-			xRotationPercentage : xRotationPercentage,
-			yRotationPercentage : yRotationPercentage,
-			xTranslationPercentage : xTranslationPercentage,
-			yTranslationPercentage : yTranslationPercentage 
-		});
-
-		appleTvAnimate($(this).children('.cog2'), 600, {
-			maxTranslationX : maxTranslation * 1.4,
-			maxTranslationY : maxTranslation * 1.4,
-			maxRotationX : maxRotation,
-			maxRotationY : maxRotation,
-			xRotationPercentage : xRotationPercentage,
-			yRotationPercentage : yRotationPercentage,
-			xTranslationPercentage : xTranslationPercentage,
-			yTranslationPercentage : yTranslationPercentage 
-		});
-
-		appleTvAnimate($(this).children('.cog3'), 600, {
-			maxTranslationX : maxTranslation * 1.8,
-			maxTranslationY : maxTranslation * 1.8,
-			maxRotationX : maxRotation,
-			maxRotationY : maxRotation,
-			xRotationPercentage : xRotationPercentage,
-			yRotationPercentage : yRotationPercentage,
-			xTranslationPercentage : xTranslationPercentage,
-			yTranslationPercentage : yTranslationPercentage 
-		});
-
+		
 	});
 
 	function appleTvAnimate(element, perspectiveAmount, config) {
