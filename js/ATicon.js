@@ -91,7 +91,7 @@
 
 
 			// For animating the glow
-			that.appleTvAnimate($('.glow'), {
+			that.appleTvAnimate(that.$icon.find('.glow'), {
 				maxTranslationX : that.maxTranslation * 5,
 				maxTranslationY : that.maxTranslation * 5,
 				maxRotationX : that.maxRotation,
