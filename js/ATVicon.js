@@ -1,4 +1,4 @@
-/*! ATVicon.js, v1.0.2 - Author: Nash Vail (nashvail.me) - https://github.com/nashvail/ATVIcons */
+/*! ATVicon.js, v1.0.3 - Author: Nash Vail (nashvail.me) - https://github.com/nashvail/ATVIcons */
 (function() {
   'use strict';
 
@@ -78,7 +78,18 @@
     if ( !el || !(el instanceof Element) ) { return false; }
 
     this.el = el;
-    this.children = el.querySelectorAll('[data-stacking]');
+    this.children = [];
+
+    var children = el.querySelectorAll('[data-stacking]'),
+        len = children.length,
+        i = 0;
+
+    for (; i < len; i++) {
+      this.children[i] = {
+        el: children[i],
+        stacking: children[i].getAttribute('data-stacking')
+      };
+    }
 
     // Combine user options with default options
     for (var key in options) {
@@ -117,13 +128,11 @@
 
       var len = this.children.length,
           i = 0,
-          child,
-          stackingFactor;
+          child;
 
-      for (; i< len; i++) {
+      for (; i < len; i++) {
         child = this.children[i];
-        stackingFactor = child.getAttribute('data-stacking');
-        this.setTransform(child, stackingFactor);
+        this.setTransform(child.el, child.stacking);
       }
 
       // Keep animating until values are reset to 0
