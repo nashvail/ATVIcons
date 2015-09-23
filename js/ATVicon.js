@@ -1,4 +1,4 @@
-/*! ATVicon.js, v1.0 - Author: Nash Vail (nashvail.me) - https://github.com/nashvail/ATVIcons */
+/*! ATVicon.js, v1.0.1 - Author: Nash Vail (nashvail.me) - https://github.com/nashvail/ATVIcons */
 (function() {
   'use strict';
 
@@ -138,16 +138,16 @@
     };
 
     this.el.addEventListener('mousemove', throttle(this.mousemove,50).bind(this));
-    this.el.addEventListener('mouseleave',throttle(this.mouseleave,500).bind(this));
+    this.el.addEventListener('mouseleave',throttle(this.mouseleave,300).bind(this));
   }
 
   Icon.prototype = {
 
     // Default options, overidden with values provided on call.
     opts: {
-      maxRotation: 16, // Maximum rotation for the icon's children, in degrees
-      maxTranslation: 10, // Maximum translation for the icon's children, in pixels. Affected by the child's
-      perspective: 600, // How drastic the 3D effect is. Lower values increase the effect. See https://developer.mozilla.org/en-US/docs/Web/CSS/perspective for more info
+      maxRotation: 8, // Maximum rotation for the icon's children, in degrees
+      maxTranslation: 4, // Maximum translation for the icon's children, in pixels. Affected by the child's
+      perspective: 800, // How drastic the 3D effect is. Lower values increase the effect. See https://developer.mozilla.org/en-US/docs/Web/CSS/perspective for more info
       damping: 0.1 // How quickly the icon will move. 1 = instant, 0.1 = slow
     },
 

@@ -95,7 +95,7 @@ body {
   height: 100px;
   width: 100px;
   border-radius: 100%;
-  background-image: url("../images/Big Geared Wheel.png");
+  background: url("../images/Big Geared Wheel.png") no-repeat;
   z-index: 3;
 }
 
@@ -106,7 +106,7 @@ body {
   height: 63px;
   width: 63px;
   border-radius: 100%;
-  background-image: url("../images/Smaller Geared Wheel.png");
+  background: url("../images/Smaller Geared Wheel.png") no-repeat;
   z-index: 4;
 }
 
