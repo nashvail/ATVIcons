@@ -23,10 +23,10 @@ Set up your 3D icon with children that have a `data-stacking` attribute which de
 </div>
 ```
 
-Include the `ATVicon.js` file on your page and call the `ATVicon` function just before the `</body>` closing tag or on DOM ready.
+Include the minified `ATVicon.min.js` file on your page and call the `ATVicon` function just before the `</body>` closing tag or on DOM ready.
 
 ```javascript
-<script src="js/ATVicon.js"></script>
+<script src="js/ATVicon.min.js"></script>
 <script> ATVicon('.icon'); </script>
 </body>
 ```

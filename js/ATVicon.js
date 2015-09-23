@@ -1,4 +1,4 @@
-/*! ATVicon.js, v1.0.1 - Author: Nash Vail (nashvail.me) - https://github.com/nashvail/ATVIcons */
+/*! ATVicon.js, v1.0.2 - Author: Nash Vail (nashvail.me) - https://github.com/nashvail/ATVIcons */
 (function() {
   'use strict';
 
@@ -54,27 +54,20 @@
     };
   }
 
-  function calculateRotationPercentage(offset, dimension) {
-    return ((-2 / dimension) * offset) + 1;
-  }
+  function calculateRotationPercentage(offset, dimension) { return ((-2 / dimension) * offset) + 1; }
 
-  function calculateTranslationPercentage(offset, dimension) {
-    return ((-2 / dimension) * offset) + 1;
-  }
+  function calculateTranslationPercentage(offset, dimension) { return ((-2 / dimension) * offset) + 1; }
 
   // Round number to 4 decimal places
-  function round(num) {
-    return Math.ceil(num * 10000)/10000;
-  }
+  function round(num) { return Math.ceil(num * 10000)/10000; }
 
   // Factory method that creates a new Icon instance for each element provided or matching the selector.
   window.ATVicon = function(selector,options) {
     var elems = ( typeof selector === typeof "" ? D.querySelectorAll(selector) :
-                 selector instanceof Element ? [selector] : false ),
+                 selector instanceof Element ? [selector] : selector ),
         len = elems.length,
         i = 0;
 
-    //
     for (; i < len; i++){ elems[i] = new Icon(elems[i],options); }
 
     return elems;
@@ -82,7 +75,7 @@
 
   function Icon(el,options) {
 
-    if ( !el ) { return false; }
+    if ( !el || !(el instanceof Element) ) { return false; }
 
     this.el = el;
     this.children = el.querySelectorAll('[data-stacking]');
