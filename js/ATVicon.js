@@ -1,4 +1,4 @@
-/*! ATVicon.js, v1.0.3 - Author: Nash Vail (nashvail.me) - https://github.com/nashvail/ATVIcons */
+/*! ATVicon.js, v1.0.4 - Author: Nash Vail (nashvail.me) - https://github.com/nashvail/ATVIcons @preserve */
 (function() {
   'use strict';
 
@@ -34,7 +34,7 @@
 
   // If browser does not support transforms, quit.
   if ( !transformProperty ) {
-    window.ATVicon = function(){ return false };
+    window.ATVicon = function(){ return false; };
     return false;
   }
 
@@ -63,14 +63,15 @@
 
   // Factory method that creates a new Icon instance for each element provided or matching the selector.
   window.ATVicon = function(selector,options) {
-    var elems = ( typeof selector === typeof "" ? D.querySelectorAll(selector) :
+    var elements = ( typeof selector === typeof "" ? D.querySelectorAll(selector) :
                  selector instanceof Element ? [selector] : selector ),
-        len = elems.length,
-        i = 0;
+        len = elements.length,
+        i = 0,
+        icons = [];
 
-    for (; i < len; i++){ elems[i] = new Icon(elems[i],options); }
+    for (; i < len; i++){ icons[i] = new Icon(elements[i],options); }
 
-    return elems;
+    return icons;
   };
 
   function Icon(el,options) {
@@ -109,16 +110,7 @@
         _xT = 0,
         _yT = 0;
 
-    this.setTransform = function(element, stackingFactor) {
-      stackingFactor = stackingFactor || 1;
-
-      var rotate = "perspective(" + this.opts.perspective + "px) rotateX(" + _xR * this.opts.maxRotation + "deg)" + " rotateY(" + _yR * this.opts.maxRotation + "deg)";
-
-      var translate = " translate3d(" + _xT * this.opts.maxTranslation * stackingFactor + "px," + _yT * this.opts.maxTranslation * stackingFactor + "px, 0px)";
-
-      element.style[transformProperty] = rotate + translate;
-    };
-
+    // Localized animate function to use the private variables.
     this.animate = function(){
 
       _xR = round( _xR + ( (this.xRotation - _xR)    * this.opts.damping ));
@@ -132,15 +124,18 @@
 
       for (; i < len; i++) {
         child = this.children[i];
-        this.setTransform(child.el, child.stacking);
+        this.setTransform(child.el, child.stacking, _xR, _yR, _xT, _yT);
       }
 
       // Keep animating until values are reset to 0
       if ( _xR && _yR && _xT && _yT ) { rAF(this.animate.bind(this)); }
     };
 
+    this.el.addEventListener('touchmove', throttle(this.mousemove,50).bind(this));
     this.el.addEventListener('mousemove', throttle(this.mousemove,50).bind(this));
     this.el.addEventListener('mouseleave',throttle(this.mouseleave,300).bind(this));
+    this.el.addEventListener('touchleave',throttle(this.mouseleave,300).bind(this));
+    this.el.addEventListener('touchend', throttle(this.mouseleave,300).bind(this));
   }
 
   Icon.prototype = {
@@ -153,12 +148,7 @@
       damping: 0.1 // How quickly the icon will move. 1 = instant, 0.1 = slow
     },
 
-    xRotation: 0,
-    yRotation: 0,
-    xTranslation: 0,
-    yTranslation: 0,
-
-    // Get element size for determining
+    // Get element size for determining rotation & transforms
     resize: function(){
       var rect = this.el.getBoundingClientRect();
 
@@ -171,12 +161,25 @@
       this.height = rect.height;
     },
 
+
+    setTransform: function(element, stackingFactor, xRotation, yRotation, xTransform, yTransform) {
+      stackingFactor = stackingFactor || 1;
+
+      var rotate = "perspective(" + this.opts.perspective + "px) rotateX(" + xRotation * this.opts.maxRotation + "deg)" + " rotateY(" + yRotation * this.opts.maxRotation + "deg)";
+
+      var translate = " translate3d(" + xTransform * this.opts.maxTranslation * stackingFactor + "px," + yTransform * this.opts.maxTranslation * stackingFactor + "px, 0px)";
+
+      element.style[transformProperty] = rotate + translate;
+    },
+
     mousemove: function(e) {
 
       var mouseX = ( e.touches ? e.touches[0].clientX : e.clientX ), // touch support
-          mouseY = ( e.touches ? e.touches[0].clientY : e.clientY ),
+          mouseY = ( e.touches ? e.touches[0].clientY : e.clientY ), // touch support
           mouseOffsetInsideX = mouseX - this.offset.left,
           mouseOffsetInsideY = mouseY - this.offset.top;
+
+      if ( e.touches ) { e.preventDefault(); }
 
       this.xRotation = calculateRotationPercentage(mouseOffsetInsideY, this.height);
       this.yRotation = calculateRotationPercentage(mouseOffsetInsideX, this.width) * -1;
